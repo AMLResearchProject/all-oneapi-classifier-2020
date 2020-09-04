@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<mapping>
+	<map>
+		<framework name="AllDS2020_TF_CNN/dense/MatMul/ReadVariableOp" out_port_id="0"/>
+		<IR id="16" name="AllDS2020_TF_CNN/dense/MatMul/1_port_transpose616_const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/flatten/Reshape" out_port_id="0"/>
+		<IR id="15" name="AllDS2020_TF_CNN/flatten/Reshape" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/max_pooling2d/MaxPool" out_port_id="0"/>
+		<IR id="13" name="AllDS2020_TF_CNN/max_pooling2d/MaxPool/Transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Identity" out_port_id="0"/>
+		<IR id="20" name="AllDS2020_TF_CNN/activation/Softmax" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/activation/Softmax" out_port_id="0"/>
+		<IR id="20" name="AllDS2020_TF_CNN/activation/Softmax" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/flatten/Reshape/shape" out_port_id="0"/>
+		<IR id="14" name="AllDS2020_TF_CNN/flatten/Reshape/Cast_1789_const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d/Conv2D" out_port_id="0"/>
+		<IR id="2" name="AllDS2020_TF_CNN/conv2d/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d/BiasAdd" out_port_id="0"/>
+		<IR id="4" name="AllDS2020_TF_CNN/conv2d/BiasAdd/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d_1/BiasAdd" out_port_id="0"/>
+		<IR id="9" name="AllDS2020_TF_CNN/conv2d_1/BiasAdd/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d_1/Conv2D/ReadVariableOp" out_port_id="0"/>
+		<IR id="6" name="AllDS2020_TF_CNN/conv2d_1/Conv2D/ReadVariableOp/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d_1/Conv2D" out_port_id="0"/>
+		<IR id="7" name="AllDS2020_TF_CNN/conv2d_1/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/dense/BiasAdd" out_port_id="0"/>
+		<IR id="19" name="AllDS2020_TF_CNN/dense/BiasAdd/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d_1/Relu" out_port_id="0"/>
+		<IR id="10" name="AllDS2020_TF_CNN/conv2d_1/Relu" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/dense/MatMul" out_port_id="0"/>
+		<IR id="17" name="AllDS2020_TF_CNN/dense/MatMul" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d/Conv2D/ReadVariableOp" out_port_id="0"/>
+		<IR id="1" name="x/reverse_input_channels/Concat739_const" out_port_id="1"/>
+	</map>
+</mapping>
