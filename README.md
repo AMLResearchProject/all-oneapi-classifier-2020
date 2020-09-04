@@ -1,9 +1,9 @@
 # Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
-## onenAPI Acute Lymphoblastic Leukemia Classifier
+## oneAPI Acute Lymphoblastic Leukemia Classifier
 
-![Acute Lymphoblastic Leukemia Tensorflow 2020](Media/Images/Peter-Moss-Acute-Myeloid-Lymphoblastic-Leukemia-Research-Project.png)
+![OneAPI Acute Lymphoblastic Leukemia Classifier](Media/Images/Peter-Moss-Acute-Myeloid-Lymphoblastic-Leukemia-Research-Project.png)
 
-[![CURRENT RELEASE](https://img.shields.io/badge/CURRENT%20RELEASE-0.0.0-blue.svg)](https://github.com/AMLResearchProject/oneAPI-ALL-Classifier/tree/0.0.0) [![UPCOMING RELEASE](https://img.shields.io/badge/CURRENT%20DEV%20BRANCH-0.1.0-blue.svg)](https://github.com/AMLResearchProject/oneAPI-ALL-Classifier/tree/0.1.0) [![Contributions Welcome!](https://img.shields.io/badge/Contributions-Welcome-lightgrey.svg)](CONTRIBUTING.md)  [![Issues](https://img.shields.io/badge/Issues-Welcome-lightgrey.svg)](issues) [![LICENSE](https://img.shields.io/badge/LICENSE-MIT-blue.svg)](LICENSE)
+[![CURRENT RELEASE](https://img.shields.io/badge/CURRENT%20RELEASE-0.1.0-blue.svg)](https://github.com/AMLResearchProject/oneAPI-ALL-Classifier/tree/0.1.0) [![UPCOMING RELEASE](https://img.shields.io/badge/CURRENT%20DEV%20BRANCH-0.2.0-blue.svg)](https://github.com/AMLResearchProject/oneAPI-ALL-Classifier/tree/0.2.0) [![Contributions Welcome!](https://img.shields.io/badge/Contributions-Welcome-lightgrey.svg)](CONTRIBUTING.md)  [![Issues](https://img.shields.io/badge/Issues-Welcome-lightgrey.svg)](issues) [![LICENSE](https://img.shields.io/badge/LICENSE-MIT-blue.svg)](LICENSE)
 
 &nbsp;
 
@@ -18,6 +18,7 @@
 - [Intel® Distribution for Python](#intel-distribution-for-python)
 - [Intel® Optimization for TensorFlow](#intel-optimization-for-tensorflow)
 - [Intel® Distribution of OpenVINO™ Toolkit](#intel-distribution-of-openvino-toolkit)
+- [Intel® Movidius™ Neural Compute Stick 2](#intel-movidius-neural-compute-stick-2)
 - [Projects](#projects)
   - [CNN](#cnn)
   - [RPI4](#RPI4)
@@ -32,7 +33,7 @@
 
 # Introduction
 
-![Acute Lymphoblastic Leukemia Tensorflow 2020](Media/Images/paper_1_architecture.png)
+![OneAPI Acute Lymphoblastic Leukemia Classifier](Media/Images/paper_1_architecture.png)
 
 _Fig 1. Proposed architecture ([Source](https://airccj.org/CSCP/vol7/csit77505.pdf "Source"))_
 
@@ -50,7 +51,7 @@ These projects should be used for research purposes only. The purpose of the pro
 
 Although the classifiers are accurate and show good results both on paper and in real world testing, they are not meant to be an alternative to professional medical diagnosis.
 
-Developers that have contributed to this repository have experience in using Artificial Intelligence for detecting certain types of cancer. They are not a doctors, medical or cancer experts.
+Developers that have contributed to this repository have experience in using Artificial Intelligence for detecting certain types of cancer. They are not doctors, medical or cancer experts.
 
 Please use this system responsibly.
 
@@ -94,7 +95,15 @@ In this project, [ALL-IDB1](https://homes.di.unimi.it/scotti/all/#datasets) is u
 ![Intel® Distribution of OpenVINO™ Toolkit](Media/Images/intel-openvino.jpg)
 [Intel® Distribution of OpenVINO™ Toolkit](https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit.html) is based on Convolutional Neural Networks and optimizes models used on Intel CPUs/GPUs, VPUs, FPGA etc. Models are converted to [Intermediate Representations (IR)](https://docs.openvinotoolkit.org/latest/openvino_docs_MO_DG_IR_and_opsets.html) which allow them to be used with the [Inference Engine](https://docs.openvinotoolkit.org/2020.2/_docs_IE_DG_Deep_Learning_Inference_Engine_DevGuide.html).
 
-# Projects
+&nbsp;
+
+#### Intel® Movidius™ Neural Compute Stick 2
+[![Intel® Movidius™ Neural Compute Stick 2](Media/Images/Movidius-NCS2.jpg)](https://software.intel.com/content/www/us/en/develop/hardware/neural-compute-stick.html)
+The Intel® Movidius™ Neural Compute Stick 2 is a USB plug & play AI device for deep learning inference at the edge. Combined with the Intel® OpenVINO™ Toolkit, developers can develop, fine-tune, and deploy convolutional neural networks (CNNs) on low-power applications that require real-time inference.
+
+&nbsp;
+
+#  Projects
 There are three projects included in this repository: [CNN](CNN), [RPI4](RPI4) & [UP2](UP2).
 
 ## CNN
@@ -109,29 +118,24 @@ There are three projects included in this repository: [CNN](CNN), [RPI4](RPI4) &
 &nbsp;
 
 # Contributing
-
 The Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research project encourages and welcomes code contributions, bug fixes and enhancements from the Github.
 
 Please read the [CONTRIBUTING](CONTRIBUTING.md "CONTRIBUTING") document for a full guide to forking our repositories and submitting your pull requests. You will also find information about our code of conduct on this page.
 
 ## Contributors
-
-- [Adam Milton-Barker](https://www.leukemiaresearchassociation.ai/team/adam-milton-barker "Adam Milton-Barker") - [Asociacion De Investigation En Inteligencia Artificial Para La Leucemia Peter Moss](https://www.leukemiaresearchassociation.ai "Asociacion De Investigation En Inteligencia Artificial Para La Leucemia Peter Moss") President/Lead Developer, Sabadell, Spain
+- [Adam Milton-Barker](https://www.leukemiaresearchassociation.ai/team/adam-milton-barker "Adam Milton-Barker") - [Asociacion De Investigacion En Inteligencia Artificial Para La Leucemia Peter Moss](https://www.leukemiaresearchassociation.ai "Asociacion De Investigacion En Inteligencia Artificial Para La Leucemia Peter Moss") President/Lead Developer, Sabadell, Spain
 
 &nbsp;
 
 # Versioning
-
 We use SemVer for versioning.
 
 &nbsp;
 
 # License
-
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE.md "LICENSE") file for details.
 
 &nbsp;
 
 # Bugs/Issues
-
 We use the [repo issues](issues "repo issues") to track bugs and general requests related to using this project. See [CONTRIBUTING](CONTRIBUTING.md "CONTRIBUTING") for more info on how to submit bugs, feature requests and proposals.
