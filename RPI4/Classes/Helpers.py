@@ -1,14 +1,14 @@
 ############################################################################################
 #
 # Project:       Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
-# Repository:    OneAPI Acute Lymphoblastic Leukemia Classifier
-# Project:       OneAPI Acute Lymphoblastic Leukemia Classifier CNN
+# Repository:    oneAPI Acute Lymphoblastic Leukemia Classifier
+# Project:       OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic Leukemia Classifier
 #
 # Author:        Adam Milton-Barker (AdamMiltonBarker.com)
 #
 # Title:         Helper Class
-# Description:   Helper functions for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN
-#                ALL Classifier.
+# Description:   Helper class for the OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic
+#                Leukemia Classifier.
 # License:       MIT License
 # Last Modified: 2020-09-04
 #
@@ -26,7 +26,8 @@ from datetime import datetime
 class Helpers():
 	""" Helper Class
 
-	Helper functions for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
+	Helper functions for the OneAPI OpenVINO Raspberry Pi 4 Acute
+	Lymphoblastic Leukemia Classifier.
 	"""
 
 	def __init__(self, ltype, log=True):

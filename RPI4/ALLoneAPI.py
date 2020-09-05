@@ -2,12 +2,12 @@
 #
 # Project:       Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
 # Repository:    oneAPI Acute Lymphoblastic Leukemia Classifier
-# Project:       OneAPI Acute Lymphoblastic Leukemia Classifier CNN
+# Project:       ALLoneAPI RPI4 CNN
 #
 # Author:        Adam Milton-Barker (AdamMiltonBarker.com)
-# Contributors:
-# Title:         ALLoneAPI CNN
-# Description:   Core class for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
+#
+# Title:         ALLoneAPI RPI4 CNN Core
+# Description:   Core class for the oneAPI RPI4 Acute Lymphoblastic Leukemia Classifier.
 # License:       MIT License
 # Last Modified: 2020-09-04
 #
@@ -20,9 +20,9 @@ from Classes.Model import Model
 from Classes.Server import Server
 
 class ALLoneAPI():
-	""" ALLoneAPI CNN
+	""" ALLoneAPI RPI4 CNN Core Class
 
-	Core class for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
+	Core class for the oneAPI RPI4 Acute Lymphoblastic Leukemia Classifier.
 	"""
 
 	def __init__(self):
@@ -30,16 +30,7 @@ class ALLoneAPI():
 
 		self.Helpers = Helpers("Core")
 		self.Core = Model()
-
-		self.Helpers.logger.info("Class initialization complete.")
-
-	def do_train(self):
-		""" Creates & trains the model. """
-
-		self.Core.do_data()
-		self.Core.do_network()
-		self.Core.do_train()
-		self.Core.do_evaluate()
+		self.Helpers.logger.info("ALLoneAPI RPI4 CNN initialization complete.")
 
 	def do_load_model(self):
 		""" Loads the model """
@@ -77,11 +68,7 @@ def main():
 
 	mode = sys.argv[1]
 
-	if mode == "Train":
-		""" Creates and trains the classifier """
-		ALLoneAPI.do_train()
-
-	elif mode == "Classify":
+	if mode == "Classify":
 		""" Runs the classifier locally."""
 		ALLoneAPI.do_classify()
 

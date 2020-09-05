@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<mapping>
+	<map>
+		<framework name="Identity" out_port_id="0"/>
+		<IR id="10" name="AllDS2020_TF_CNN/activation/Softmax" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/activation/Softmax" out_port_id="0"/>
+		<IR id="10" name="AllDS2020_TF_CNN/activation/Softmax" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d/BiasAdd" out_port_id="0"/>
+		<IR id="1" name="AllDS2020_TF_CNN/conv2d/Conv2D" out_port_id="3"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/max_pooling2d/MaxPool" out_port_id="0"/>
+		<IR id="6" name="AllDS2020_TF_CNN/max_pooling2d/MaxPool/Transpose" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d_1/BiasAdd" out_port_id="0"/>
+		<IR id="3" name="AllDS2020_TF_CNN/conv2d_1/Conv2D" out_port_id="3"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/flatten/Reshape" out_port_id="0"/>
+		<IR id="8" name="AllDS2020_TF_CNN/flatten/Reshape" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/conv2d_1/Relu" out_port_id="0"/>
+		<IR id="4" name="AllDS2020_TF_CNN/conv2d_1/Relu" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/dense/BiasAdd" out_port_id="0"/>
+		<IR id="9" name="AllDS2020_TF_CNN/dense/MatMul" out_port_id="3"/>
+	</map>
+	<map>
+		<framework name="AllDS2020_TF_CNN/flatten/Reshape/shape" out_port_id="0"/>
+		<IR id="7" name="AllDS2020_TF_CNN/flatten/Reshape/Cast_1856_const" out_port_id="1"/>
+	</map>
+</mapping>

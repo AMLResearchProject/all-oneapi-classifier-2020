@@ -2,14 +2,14 @@
 #
 # Project:       Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
 # Repository:    OneAPI Acute Lymphoblastic Leukemia Classifier
-# Project:       ALLoneAPI CNN
+# Project:       OneAPI Acute Lymphoblastic Leukemia Classifier CNN
 #
 # Author:        Adam Milton-Barker (AdamMiltonBarker.com)
-# Contributors:
+#
 # Title:         Model Class
-# Description:   Model functions for the OneAPI Acute Lymphoblastic Leukemia Classifier.
+# Description:   Model functions for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
 # License:       MIT License
-# Last Modified: 2020-09-03
+# Last Modified: 2020-09-04
 #
 ############################################################################################
 
@@ -19,6 +19,8 @@ import os
 import random
 import requests
 import time
+
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -35,7 +37,7 @@ from Classes.Data import Data
 class Model():
 	""" Model Class
 
-	Model functions for the OneAPI Acute Lymphoblastic Leukemia Classifier.
+	Model functions for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
 	"""
 
 	def __init__(self):
@@ -55,8 +57,6 @@ class Model():
 		self.valid = self.Helpers.confs["cnn"]["data"]["valid_types"]
 		self.seed = self.Helpers.confs["cnn"]["data"]["seed"]
 
-		self.colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
-
 		self.weights_file = self.Helpers.confs["cnn"]["model"]["weights"]
 		self.model_json = self.Helpers.confs["cnn"]["model"]["model"]
 
@@ -64,7 +64,7 @@ class Model():
 		seed(self.seed)
 		tf.random.set_seed(self.seed)
 
-		self.Helpers.logger.info("Model class initialization complete.")
+		self.Helpers.logger.info("Class initialization complete.")
 
 	def do_data(self):
 		""" Creates/sorts dataset. """
@@ -101,7 +101,7 @@ class Model():
 			tf.keras.layers.Dense(2),
 			tf.keras.layers.Activation('softmax')
 		],
-		"AllDS2020_TF_CNN")
+		"ALLoneAPI_CNN")
 		self.tf_model.summary()
 		self.Helpers.logger.info("Network initialization complete.")
 
@@ -322,13 +322,16 @@ class Model():
 		fp = 0
 		tn = 0
 		fn = 0
+		totaltime = 0
 
 		for testFile in os.listdir(self.testing_dir):
 			if os.path.splitext(testFile)[1] in self.valid:
 
+
 				files += 1
 				fileName = self.testing_dir + "/" + testFile
 
+				start = time.time()
 				img = cv2.imread(fileName).astype(np.float32)
 				self.Helpers.logger.info("Loaded test image " + fileName)
 
@@ -337,20 +340,23 @@ class Model():
 				img = self.reshape(img)
 
 				prediction = self.get_predictions(img)
+				end = time.time()
+				benchmark = end - start
+				totaltime += benchmark
 
 				msg = ""
 				if prediction == 1 and "_1." in testFile:
 					tp += 1
-					msg = "Acute Lymphoblastic Leukemia correctly detected (True Positive)"
+					msg = "Acute Lymphoblastic Leukemia correctly detected (True Positive) in " + str(benchmark) + " seconds."
 				elif prediction == 1 and "_0." in testFile:
 					fp += 1
-					msg = "Acute Lymphoblastic Leukemia incorrectly detected (False Positive)"
+					msg = "Acute Lymphoblastic Leukemia incorrectly detected (False Positive) in " + str(benchmark) + " seconds."
 				elif prediction == 0 and "_0." in testFile:
 					tn += 1
-					msg = "Acute Lymphoblastic Leukemia correctly not detected (True Negative)"
+					msg = "Acute Lymphoblastic Leukemia correctly not detected (True Negative) in " + str(benchmark) + " seconds."
 				elif prediction == 0 and "_1." in testFile:
 					fn += 1
-					msg = "Acute Lymphoblastic Leukemia incorrectly not detected (False Negative)"
+					msg = "Acute Lymphoblastic Leukemia incorrectly not detected (False Negative) in " + str(benchmark) + " seconds."
 				self.Helpers.logger.info(msg)
 
 		self.Helpers.logger.info("Images Classifier: " + str(files))
@@ -358,6 +364,7 @@ class Model():
 		self.Helpers.logger.info("False Positives: " + str(fp))
 		self.Helpers.logger.info("True Negatives: " + str(tn))
 		self.Helpers.logger.info("False Negatives: " + str(fn))
+		self.Helpers.logger.info("Total Time Taken: " + str(totaltime))
 
 	def send_request(self, img_path):
 		""" Sends image to the inference API endpoint. """

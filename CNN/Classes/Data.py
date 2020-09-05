@@ -2,14 +2,14 @@
 #
 # Project:       Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
 # Repository:    OneAPI Acute Lymphoblastic Leukemia Classifier
-# Project:       ALLoneAPI CNN
+# Project:       OneAPI Acute Lymphoblastic Leukemia Classifier CNN
 #
 # Author:        Adam Milton-Barker (AdamMiltonBarker.com)
-# Contributors:
+#
 # Title:         Data helper class
-# Description:   Data functions for the OneAPI Acute Lymphoblastic Leukemia Classifier.
+# Description:   Data functions for the OneAPI Acute OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
 # License:       MIT License
-# Last Modified: 2020-09-03
+# Last Modified: 2020-09-04
 #
 ############################################################################################
 
@@ -37,7 +37,7 @@ from Classes.Augmentation import Augmentation
 class Data():
 	""" Data class
 
-	Data functions for the OneAPI Acute Lymphoblastic Leukemia Classifier.
+	Data functions for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
 	"""
 
 	def __init__(self):
@@ -54,7 +54,7 @@ class Data():
 		self.data = []
 		self.labels = []
 
-		self.Helpers.logger.info("Data class initialization complete.")
+		self.Helpers.logger.info("Class initialization complete.")
 
 	def do_im_process(self):
 		""" Sorts the training data and labels for your model. """

@@ -1,6 +1,6 @@
 # Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
 ## OneAPI Acute Lymphoblastic Leukemia Classifier
-### ALLoneAPI CNN
+### OneAPI Acute Lymphoblastic Leukemia Classifier CNN
 
 ![OneAPI Acute Lymphoblastic Leukemia Classifier](../Media/Images/Peter-Moss-Acute-Myeloid-Lymphoblastic-Leukemia-Research-Project.png)
 
@@ -25,12 +25,18 @@
         - [Training Results](#training-results)
         - [Metrics Overview](#metrics-overview)
         - [ALL-IDB Required Metrics](#all-idb-required-metrics)
-- [Local Testing](#local-testing)
-    - [Local Testing Results](#local-testing-results)
+- [Local Testing (CPU)](#local-testing-cpu)
+    - [Local Testing Results (CPU)](#local-testing-results-cpu)
+- [Local Testing (CPU/Intel Optimized Tensorflow)](#local-testing-cpuintel-optimized-tensorflow)
+    - [Local Testing Results (CPU/Intel Optimized Tensorflow)](#local-testing-results-cpuintel-optimized-tensorflow)
+- [Local Testing (GPU)](#local-testing-gpu)
+    - [Local Testing Results (GPU)](#local-testing-results-gpu)
+- [Local Testing (OpenVINO)](#local-testing-openvino)
 - [Server Testing](#server-testing)
     - [Server Testing Results](#server-testing-results)
 - [OpenVINO Testing](#openvino-testing)
     - [OpenVINO Testing Results](#openvino-testing-results)
+- [Conclusion](#conclusion)
 - [Raspberry Pi 4](#raspberry-pi-4)
 - [UP2](#up2)
 - [Contributing](#contributing)
@@ -42,7 +48,7 @@
 &nbsp;
 
 # Introduction
-This project trains the model that will be used in our Acute the Lymphoblastic Leukemia Detection Systems. The network provided in this project was originally created in [ALL research papers evaluation project](https://github.com/LeukemiaAiResearch/ALL-IDB-Classifiers/tree/master/Projects/Paper-1 "ALL research papers evaluation project"), where you replicated the network proposed in the [Acute Leukemia Classification Using Convolution Neural Network In Clinical Decision Support System](https://airccj.org/CSCP/vol7/csit77505.pdf "Acute Leukemia Classification Using Convolution Neural Network In Clinical Decision Support System") paper by Thanh.TTP, Giao N. Pham, Jin-Hyeok Park, Kwang-Seok Moon, Suk-Hwan Lee, and Ki-Ryong Kwon, and the data augmentation proposed in  [Leukemia Blood Cell Image Classification Using Convolutional Neural Network](http://www.ijcte.org/vol10/1198-H0012.pdf "Leukemia Blood Cell Image Classification Using Convolutional Neural Network") by T. T. P. Thanh, Caleb Vununu, Sukhrob Atoev, Suk-Hwan Lee, and Ki-Ryong Kwon.
+The OneAPI Acute Lymphoblastic Leukemia Classifier CNN project allows you train a Convolutional Neural Network for detectimh Acute Lymphoblastic Leukemia. This model can be used in several of our Acute the Lymphoblastic Leukemia Detection Systems, including the [HIAS ALL Detection System](), the [Magic Leap 1 ALL Detection System](https://github.com/AMLResearchProject/Magic-Leap-1-ALL-Detection-System-2020), and the [Oculus Rift ALL Detection System](https://github.com/AMLResearchProject/Oculus-Rift-ALL-Detection-System-2020). The network provided in this project is based on the network proposed in the [Acute Leukemia Classification Using Convolution Neural Network In Clinical Decision Support System](https://airccj.org/CSCP/vol7/csit77505.pdf "Acute Leukemia Classification Using Convolution Neural Network In Clinical Decision Support System") paper by Thanh.TTP, Giao N. Pham, Jin-Hyeok Park, Kwang-Seok Moon, Suk-Hwan Lee, and Ki-Ryong Kwon, and the data augmentation proposed in  [Leukemia Blood Cell Image Classification Using Convolutional Neural Network](http://www.ijcte.org/vol10/1198-H0012.pdf "Leukemia Blood Cell Image Classification Using Convolutional Neural Network") by T. T. P. Thanh, Caleb Vununu, Sukhrob Atoev, Suk-Hwan Lee, and Ki-Ryong Kwon.
 
 We have provided all of the pretrained models in the [Model](Model) directory.
 
@@ -126,7 +132,7 @@ First take the ten positive and ten negative samples shown below, and place them
 Next add the remaining 88 images to the **Model/Data/Train** folder. The test images used will not be augmented.
 
 ## Configuration
-[config.json](Model/config.json "config.json")  holds the configuration for our network.
+[config.json](Model/config.json "config.json")  holds the configuration for our network. You need to change **cnn->system=>cores** to the number of cores you have on your computer.
 
 ```
 {
@@ -258,7 +264,7 @@ Our network matches the architecture proposed in the paper exactly, with excepti
 Before the model begins training, you will be shown the model summary, or architecture.
 
 ```
-Model: "AllDS2020_TF_CNN"
+Model: "ALLoneAPI_CNN"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #
 =================================================================
@@ -343,24 +349,142 @@ _Fig 6. AUC_
 
 &nbsp;
 
-# Local Testing
+# Local Testing (CPU)
 Now you will use the test data to see how the classifier reacts to our testing data. Real world testing is the most important testing, as it allows you to see the how the model performs in a real world environment.
 
-This part of the system will use the test data from the **Model/Data/Test** directory. The command to start testing locally is as follows:
+This part of the system will use the test data from the **Model/Data/Test** directory using your CPU. In this case, the CPU used was an Intel(R) Core(TM) i7-7820HK CPU @ 2.90GHz.
+
+Make sure the following line in [Classes/Model.py](Classes/Model.py) is uncommented:
 
 ```
-python ALLoneAPI.py Classify
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 ```
 
-## Local Testing Results
+To start your Tensorflow GPU environment and run the classifier on CPU, use the following commands:
+
+```
+ conda activate tf2gpu
+ python ALLoneAPI.py Classify
+ conda deactivate
+```
+
+## Local Testing Results (CPU)
+
+```
+C:\Users\intel-vr-1\AppData\Roaming\Python\Python37\site-packages\numpy\_distributor_init.py:32: UserWarning: loaded more than 1 DLL from .libs:
+C:\Users\intel-vr-1\AppData\Roaming\Python\Python37\site-packages\numpy\.libs\libopenblas.IPBC74C7KURV7CB2PKT5Z5FNR3SIBV4J.gfortran-win_amd64.dll
+C:\Users\intel-vr-1\AppData\Roaming\Python\Python37\site-packages\numpy\.libs\libopenblas.PYQHXLVVQ7VESDPUVUADXEVJOBGHJPAY.gfortran-win_amd64.dll
+  stacklevel=1)
+2020-09-05 01:45:05.971813: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+2020-09-05 01:45:10,829 - Core - INFO - Helpers class initialization complete.
+2020-09-05 01:45:10,831 - Model - INFO - Model class initialization complete.
+2020-09-05 01:45:10,832 - Core - INFO - ALLoneAPI CNN initialization complete.
+2020-09-05 01:45:10.856160: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library nvcuda.dll
+2020-09-05 01:45:10.960607: E tensorflow/stream_executor/cuda/cuda_driver.cc:314] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2020-09-05 01:45:10.966234: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: GeniSysAiVr
+2020-09-05 01:45:10.966512: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: GeniSysAiVr
+2020-09-05 01:45:10.966922: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-09-05 01:45:11.385328: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x28d63348d80 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-05 01:45:11.385477: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-09-05 01:45:11,499 - Model - INFO - Model loaded
+Model: "ALLoneAPI_CNN"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+zero_padding2d (ZeroPadding2 (None, 104, 104, 3)       0
+_________________________________________________________________
+conv2d (Conv2D)              (None, 100, 100, 30)      2280
+_________________________________________________________________
+zero_padding2d_1 (ZeroPaddin (None, 104, 104, 30)      0
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 100, 100, 30)      22530
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 50, 50, 30)        0
+_________________________________________________________________
+flatten (Flatten)            (None, 75000)             0
+_________________________________________________________________
+dense (Dense)                (None, 2)                 150002
+_________________________________________________________________
+activation (Activation)      (None, 2)                 0
+=================================================================
+Total params: 174,812
+Trainable params: 174,812
+Non-trainable params: 0
+_________________________________________________________________
+2020-09-05 01:45:11,590 - Model - INFO - Loaded test image Model/Data/Test/Im006_1.jpg
+WARNING:tensorflow:From C:\Users\intel-vr-1\Desktop\Dev\AI\oneAPI-ALL-Classifier\CNN\Classes\Model.py:456: Sequential.predict_proba (from tensorflow.python.keras.engine.sequential) is deprecated and will be removed after 2021-01-01.
+Instructions for updating:
+Please use `model.predict()` instead.
+2020-09-05 01:45:11,985 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.4616737365722656 seconds.
+2020-09-05 01:45:12,053 - Model - INFO - Loaded test image Model/Data/Test/Im020_1.jpg
+2020-09-05 01:45:12,198 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.2120676040649414 seconds.
+2020-09-05 01:45:12,255 - Model - INFO - Loaded test image Model/Data/Test/Im024_1.jpg
+2020-09-05 01:45:12,393 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.19498848915100098 seconds.
+2020-09-05 01:45:12,455 - Model - INFO - Loaded test image Model/Data/Test/Im026_1.jpg
+2020-09-05 01:45:12,604 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.2104320526123047 seconds.
+2020-09-05 01:45:12,664 - Model - INFO - Loaded test image Model/Data/Test/Im028_1.jpg
+2020-09-05 01:45:12,794 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.18949365615844727 seconds.
+2020-09-05 01:45:12,852 - Model - INFO - Loaded test image Model/Data/Test/Im031_1.jpg
+2020-09-05 01:45:12,954 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.15957283973693848 seconds.
+2020-09-05 01:45:13,095 - Model - INFO - Loaded test image Model/Data/Test/Im035_0.jpg
+2020-09-05 01:45:13,152 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.1984710693359375 seconds.
+2020-09-05 01:45:13,285 - Model - INFO - Loaded test image Model/Data/Test/Im041_0.jpg
+2020-09-05 01:45:13,336 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.1835165023803711 seconds.
+2020-09-05 01:45:13,470 - Model - INFO - Loaded test image Model/Data/Test/Im047_0.jpg
+2020-09-05 01:45:13,533 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.19747257232666016 seconds.
+2020-09-05 01:45:13,678 - Model - INFO - Loaded test image Model/Data/Test/Im053_1.jpg
+2020-09-05 01:45:13,748 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly not detected (False Negative) in 0.21405935287475586 seconds.
+2020-09-05 01:45:13,902 - Model - INFO - Loaded test image Model/Data/Test/Im057_1.jpg
+2020-09-05 01:45:13,962 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.21316766738891602 seconds.
+2020-09-05 01:45:14,112 - Model - INFO - Loaded test image Model/Data/Test/Im060_1.jpg
+2020-09-05 01:45:14,162 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.19999003410339355 seconds.
+2020-09-05 01:45:14,301 - Model - INFO - Loaded test image Model/Data/Test/Im063_1.jpg
+2020-09-05 01:45:14,349 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.1874842643737793 seconds.
+2020-09-05 01:45:14,484 - Model - INFO - Loaded test image Model/Data/Test/Im069_0.jpg
+2020-09-05 01:45:14,552 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.20245862007141113 seconds.
+2020-09-05 01:45:14,703 - Model - INFO - Loaded test image Model/Data/Test/Im074_0.jpg
+2020-09-05 01:45:14,793 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.24135661125183105 seconds.
+2020-09-05 01:45:14,941 - Model - INFO - Loaded test image Model/Data/Test/Im088_0.jpg
+2020-09-05 01:45:14,996 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly detected (False Positive) in 0.20206952095031738 seconds.
+2020-09-05 01:45:15,112 - Model - INFO - Loaded test image Model/Data/Test/Im095_0.jpg
+2020-09-05 01:45:15,156 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly detected (False Positive) in 0.15957283973693848 seconds.
+2020-09-05 01:45:15,302 - Model - INFO - Loaded test image Model/Data/Test/Im099_0.jpg
+2020-09-05 01:45:15,356 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.19947028160095215 seconds.
+2020-09-05 01:45:15,551 - Model - INFO - Loaded test image Model/Data/Test/Im101_0.jpg
+2020-09-05 01:45:15,622 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.2644679546356201 seconds.
+2020-09-05 01:45:15,759 - Model - INFO - Loaded test image Model/Data/Test/Im106_0.jpg
+2020-09-05 01:45:15,821 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.19898009300231934 seconds.
+2020-09-05 01:45:15,822 - Model - INFO - Images Classifier: 20
+2020-09-05 01:45:15,824 - Model - INFO - True Positives: 9
+2020-09-05 01:45:15,826 - Model - INFO - False Positives: 2
+2020-09-05 01:45:15,826 - Model - INFO - True Negatives: 8
+2020-09-05 01:45:15,827 - Model - INFO - False Negatives: 1
+2020-09-05 01:45:15,827 - Model - INFO - Total Time Taken: 4.290765762329102
+```
+
+# Local Testing (CPU/Intel Optimized Tensorflow)
+Now you will use the test data to see how the classifier reacts to our testing data. Real world testing is the most important testing, as it allows you to see the how the model performs in a real world environment.
+
+This part of the system will use the test data from the **Model/Data/Test** directory using your CPU and Intel Optimized Tensorflow. In this case, the CPU used was an Intel(R) Core(TM) i7-7820HK CPU @ 2.90GHz.
+
+To start your Tensorflow MKL environment and run the classifier on CPU with Intel Optimized Tensorflow, use the following commands:
+
+```
+ conda activate tf2mkl
+ python ALLoneAPI.py Classify
+ conda deactivate
+```
+
+## Local Testing Results (CPU/Intel Optimized Tensorflow)
 
 ```
 Intel(R) Data Analytics Acceleration Library (Intel(R) DAAL) solvers for sklearn enabled: https://intelpython.github.io/daal4py/sklearn.html
-2020-09-04 09:43:45,406 - Core - INFO - Helpers class initialization complete.
-2020-09-04 09:43:45,410 - Model - INFO - Model class initialization complete.
-2020-09-04 09:43:45,410 - Core - INFO - ALLoneAPI CNN initialization complete.
-2020-09-04 09:43:45.437314: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
-2020-09-04 09:43:45,617 - Model - INFO - Model loaded
+2020-09-05 01:47:03,681 - Core - INFO - Helpers class initialization complete.
+2020-09-05 01:47:03,683 - Model - INFO - Model class initialization complete.
+2020-09-05 01:47:03,683 - Core - INFO - ALLoneAPI CNN initialization complete.
+2020-09-05 01:47:03.717003: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
+2020-09-05 01:47:03,935 - Model - INFO - Model loaded
 Model: "AllDS2020_TF_CNN"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #
@@ -385,52 +509,211 @@ Total params: 174,812
 Trainable params: 174,812
 Non-trainable params: 0
 _________________________________________________________________
-2020-09-04 09:43:45,699 - Model - INFO - Loaded test image Model/Data/Test/Im006_1.jpg
-2020-09-04 09:43:45,781 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 09:43:45,848 - Model - INFO - Loaded test image Model/Data/Test/Im020_1.jpg
-2020-09-04 09:43:45,864 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 09:43:45,934 - Model - INFO - Loaded test image Model/Data/Test/Im024_1.jpg
-2020-09-04 09:43:45,951 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 09:43:46,022 - Model - INFO - Loaded test image Model/Data/Test/Im026_1.jpg
-2020-09-04 09:43:46,038 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 09:43:46,108 - Model - INFO - Loaded test image Model/Data/Test/Im028_1.jpg
-2020-09-04 09:43:46,122 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 09:43:46,187 - Model - INFO - Loaded test image Model/Data/Test/Im031_1.jpg
-2020-09-04 09:43:46,200 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 09:43:46,363 - Model - INFO - Loaded test image Model/Data/Test/Im035_0.jpg
-2020-09-04 09:43:46,380 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 09:43:46,540 - Model - INFO - Loaded test image Model/Data/Test/Im041_0.jpg
-2020-09-04 09:43:46,557 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 09:43:46,700 - Model - INFO - Loaded test image Model/Data/Test/Im047_0.jpg
-2020-09-04 09:43:46,718 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 09:43:46,881 - Model - INFO - Loaded test image Model/Data/Test/Im053_1.jpg
-2020-09-04 09:43:46,896 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly not detected (False Negative)
-2020-09-04 09:43:47,046 - Model - INFO - Loaded test image Model/Data/Test/Im057_1.jpg
-2020-09-04 09:43:47,062 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 09:43:47,206 - Model - INFO - Loaded test image Model/Data/Test/Im060_1.jpg
-2020-09-04 09:43:47,222 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 09:43:47,384 - Model - INFO - Loaded test image Model/Data/Test/Im063_1.jpg
-2020-09-04 09:43:47,400 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 09:43:47,542 - Model - INFO - Loaded test image Model/Data/Test/Im069_0.jpg
-2020-09-04 09:43:47,557 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 09:43:47,716 - Model - INFO - Loaded test image Model/Data/Test/Im074_0.jpg
-2020-09-04 09:43:47,732 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 09:43:47,889 - Model - INFO - Loaded test image Model/Data/Test/Im088_0.jpg
-2020-09-04 09:43:47,906 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly detected (False Positive)
-2020-09-04 09:43:48,041 - Model - INFO - Loaded test image Model/Data/Test/Im095_0.jpg
-2020-09-04 09:43:48,056 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly detected (False Positive)
-2020-09-04 09:43:48,216 - Model - INFO - Loaded test image Model/Data/Test/Im099_0.jpg
-2020-09-04 09:43:48,231 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 09:43:48,385 - Model - INFO - Loaded test image Model/Data/Test/Im101_0.jpg
-2020-09-04 09:43:48,401 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 09:43:48,552 - Model - INFO - Loaded test image Model/Data/Test/Im106_0.jpg
-2020-09-04 09:43:48,568 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 09:43:48,568 - Model - INFO - Images Classifier: 20
-2020-09-04 09:43:48,569 - Model - INFO - True Positives: 9
-2020-09-04 09:43:48,570 - Model - INFO - False Positives: 2
-2020-09-04 09:43:48,571 - Model - INFO - True Negatives: 8
-2020-09-04 09:43:48,573 - Model - INFO - False Negatives: 1
+2020-09-05 01:47:04,015 - Model - INFO - Loaded test image Model/Data/Test/Im006_1.jpg
+2020-09-05 01:47:04,098 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.14226913452148438 seconds.
+2020-09-05 01:47:04,154 - Model - INFO - Loaded test image Model/Data/Test/Im020_1.jpg
+2020-09-05 01:47:04,167 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.06781816482543945 seconds.
+2020-09-05 01:47:04,220 - Model - INFO - Loaded test image Model/Data/Test/Im024_1.jpg
+2020-09-05 01:47:04,238 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.06978487968444824 seconds.
+2020-09-05 01:47:04,299 - Model - INFO - Loaded test image Model/Data/Test/Im026_1.jpg
+2020-09-05 01:47:04,316 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.07782340049743652 seconds.
+2020-09-05 01:47:04,369 - Model - INFO - Loaded test image Model/Data/Test/Im028_1.jpg
+2020-09-05 01:47:04,383 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.06778931617736816 seconds.
+2020-09-05 01:47:04,443 - Model - INFO - Loaded test image Model/Data/Test/Im031_1.jpg
+2020-09-05 01:47:04,460 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.07534003257751465 seconds.
+2020-09-05 01:47:04,622 - Model - INFO - Loaded test image Model/Data/Test/Im035_0.jpg
+2020-09-05 01:47:04,641 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.18003439903259277 seconds.
+2020-09-05 01:47:04,796 - Model - INFO - Loaded test image Model/Data/Test/Im041_0.jpg
+2020-09-05 01:47:04,814 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.17348909378051758 seconds.
+2020-09-05 01:47:04,958 - Model - INFO - Loaded test image Model/Data/Test/Im047_0.jpg
+2020-09-05 01:47:04,978 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.1635303497314453 seconds.
+2020-09-05 01:47:05,118 - Model - INFO - Loaded test image Model/Data/Test/Im053_1.jpg
+2020-09-05 01:47:05,136 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly not detected (False Negative) in 0.1575782299041748 seconds.
+2020-09-05 01:47:05,262 - Model - INFO - Loaded test image Model/Data/Test/Im057_1.jpg
+2020-09-05 01:47:05,279 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.14162373542785645 seconds.
+2020-09-05 01:47:05,408 - Model - INFO - Loaded test image Model/Data/Test/Im060_1.jpg
+2020-09-05 01:47:05,424 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.14461278915405273 seconds.
+2020-09-05 01:47:05,575 - Model - INFO - Loaded test image Model/Data/Test/Im063_1.jpg
+2020-09-05 01:47:05,592 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.16752171516418457 seconds.
+2020-09-05 01:47:05,744 - Model - INFO - Loaded test image Model/Data/Test/Im069_0.jpg
+2020-09-05 01:47:05,765 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.17204809188842773 seconds.
+2020-09-05 01:47:05,896 - Model - INFO - Loaded test image Model/Data/Test/Im074_0.jpg
+2020-09-05 01:47:05,913 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.1470644474029541 seconds.
+2020-09-05 01:47:06,090 - Model - INFO - Loaded test image Model/Data/Test/Im088_0.jpg
+2020-09-05 01:47:06,113 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly detected (False Positive) in 0.1994304656982422 seconds.
+2020-09-05 01:47:06,234 - Model - INFO - Loaded test image Model/Data/Test/Im095_0.jpg
+2020-09-05 01:47:06,252 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly detected (False Positive) in 0.13962817192077637 seconds.
+2020-09-05 01:47:06,383 - Model - INFO - Loaded test image Model/Data/Test/Im099_0.jpg
+2020-09-05 01:47:06,399 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.14561891555786133 seconds.
+2020-09-05 01:47:06,525 - Model - INFO - Loaded test image Model/Data/Test/Im101_0.jpg
+2020-09-05 01:47:06,543 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.14262723922729492 seconds.
+2020-09-05 01:47:06,684 - Model - INFO - Loaded test image Model/Data/Test/Im106_0.jpg
+2020-09-05 01:47:06,702 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.15857458114624023 seconds.
+2020-09-05 01:47:06,703 - Model - INFO - Images Classifier: 20
+2020-09-05 01:47:06,703 - Model - INFO - True Positives: 9
+2020-09-05 01:47:06,704 - Model - INFO - False Positives: 2
+2020-09-05 01:47:06,705 - Model - INFO - True Negatives: 8
+2020-09-05 01:47:06,705 - Model - INFO - False Negatives: 1
+2020-09-05 01:47:06,706 - Model - INFO - Total Time Taken: 2.7342071533203125
 ```
+
+# Local Testing (GPU)
+This part of the system will use the test data from the **Model/Data/Test** directory using GPU, in this case, GeForce GTX 1080.
+
+Make sure the following line in [Classes/Model.py](Classes/Model.py) is commented:
+
+```
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+```
+
+To start your Tensorflow GPU environment and run the classifier on GPU, use the following commands:
+
+```
+ conda activate tf2gpu
+ python ALLoneAPI.py Classify
+ conda deactivate
+```
+
+## Local Testing Results (GPU)
+
+```
+C:\Users\intel-vr-1\AppData\Roaming\Python\Python37\site-packages\numpy\_distributor_init.py:32: UserWarning: loaded more than 1 DLL from .libs:
+C:\Users\intel-vr-1\AppData\Roaming\Python\Python37\site-packages\numpy\.libs\libopenblas.IPBC74C7KURV7CB2PKT5Z5FNR3SIBV4J.gfortran-win_amd64.dll
+C:\Users\intel-vr-1\AppData\Roaming\Python\Python37\site-packages\numpy\.libs\libopenblas.PYQHXLVVQ7VESDPUVUADXEVJOBGHJPAY.gfortran-win_amd64.dll
+  stacklevel=1)
+2020-09-05 01:43:47.559225: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+2020-09-05 01:43:52,715 - Core - INFO - Helpers class initialization complete.
+2020-09-05 01:43:52,718 - Model - INFO - Model class initialization complete.
+2020-09-05 01:43:52,719 - Core - INFO - ALLoneAPI CNN initialization complete.
+2020-09-05 01:43:52.760817: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library nvcuda.dll
+2020-09-05 01:43:52.905609: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties:
+pciBusID: 0000:01:00.0 name: GeForce GTX 1080 computeCapability: 6.1
+coreClock: 1.771GHz coreCount: 20 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 298.32GiB/s
+2020-09-05 01:43:52.905856: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+2020-09-05 01:43:52.952381: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cublas64_10.dll
+2020-09-05 01:43:52.976091: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2020-09-05 01:43:52.994238: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2020-09-05 01:43:53.023952: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusolver64_10.dll
+2020-09-05 01:43:53.050571: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusparse64_10.dll
+2020-09-05 01:43:53.098573: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudnn64_7.dll
+2020-09-05 01:43:53.098850: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-09-05 01:43:53.101109: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-09-05 01:43:53.583546: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x2220c079980 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-09-05 01:43:53.583724: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-09-05 01:43:53.606973: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties:
+pciBusID: 0000:01:00.0 name: GeForce GTX 1080 computeCapability: 6.1
+coreClock: 1.771GHz coreCount: 20 deviceMemorySize: 8.00GiB deviceMemoryBandwidth: 298.32GiB/s
+2020-09-05 01:43:53.607246: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudart64_101.dll
+2020-09-05 01:43:53.607975: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cublas64_10.dll
+2020-09-05 01:43:53.608569: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2020-09-05 01:43:53.609176: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2020-09-05 01:43:53.609825: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusolver64_10.dll
+2020-09-05 01:43:53.610584: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cusparse64_10.dll
+2020-09-05 01:43:53.611271: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudnn64_7.dll
+2020-09-05 01:43:53.612050: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2020-09-05 01:43:54.600926: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-09-05 01:43:54.601105: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0
+2020-09-05 01:43:54.602319: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N
+2020-09-05 01:43:54.603501: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6692 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0, compute capability: 6.1)
+2020-09-05 01:43:54.692927: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x222367d0f40 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2020-09-05 01:43:54.693069: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): GeForce GTX 1080, Compute Capability 6.1
+2020-09-05 01:43:55,392 - Model - INFO - Model loaded
+Model: "ALLoneAPI_CNN"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+zero_padding2d (ZeroPadding2 (None, 104, 104, 3)       0
+_________________________________________________________________
+conv2d (Conv2D)              (None, 100, 100, 30)      2280
+_________________________________________________________________
+zero_padding2d_1 (ZeroPaddin (None, 104, 104, 30)      0
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 100, 100, 30)      22530
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 50, 50, 30)        0
+_________________________________________________________________
+flatten (Flatten)            (None, 75000)             0
+_________________________________________________________________
+dense (Dense)                (None, 2)                 150002
+_________________________________________________________________
+activation (Activation)      (None, 2)                 0
+=================================================================
+Total params: 174,812
+Trainable params: 174,812
+Non-trainable params: 0
+_________________________________________________________________
+2020-09-05 01:43:55,480 - Model - INFO - Loaded test image Model/Data/Test/Im006_1.jpg
+WARNING:tensorflow:From C:\Users\intel-vr-1\Desktop\Dev\AI\oneAPI-ALL-Classifier\CNN\Classes\Model.py:456: Sequential.predict_proba (from tensorflow.python.keras.engine.sequential) is deprecated and will be removed after 2021-01-01.
+Instructions for updating:
+Please use `model.predict()` instead.
+2020-09-05 01:43:55.809979: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cublas64_10.dll
+2020-09-05 01:43:56.199379: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cudnn64_7.dll
+2020-09-05 01:43:57.222017: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: Invoking GPU asm compilation is supported on Cuda non-Windows platforms only
+Relying on driver to perform ptx compilation.
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+2020-09-05 01:43:57,388 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 1.9757919311523438 seconds.
+2020-09-05 01:43:57,453 - Model - INFO - Loaded test image Model/Data/Test/Im020_1.jpg
+2020-09-05 01:43:57,556 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.16655302047729492 seconds.
+2020-09-05 01:43:57,625 - Model - INFO - Loaded test image Model/Data/Test/Im024_1.jpg
+2020-09-05 01:43:57,753 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.19747233390808105 seconds.
+2020-09-05 01:43:57,807 - Model - INFO - Loaded test image Model/Data/Test/Im026_1.jpg
+2020-09-05 01:43:57,917 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.16356253623962402 seconds.
+2020-09-05 01:43:57,981 - Model - INFO - Loaded test image Model/Data/Test/Im028_1.jpg
+2020-09-05 01:43:58,105 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.18849658966064453 seconds.
+2020-09-05 01:43:58,171 - Model - INFO - Loaded test image Model/Data/Test/Im031_1.jpg
+2020-09-05 01:43:58,294 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.1874983310699463 seconds.
+2020-09-05 01:43:58,431 - Model - INFO - Loaded test image Model/Data/Test/Im035_0.jpg
+2020-09-05 01:43:58,550 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.255307674407959 seconds.
+2020-09-05 01:43:58,678 - Model - INFO - Loaded test image Model/Data/Test/Im041_0.jpg
+2020-09-05 01:43:58,807 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.2563152313232422 seconds.
+2020-09-05 01:43:58,955 - Model - INFO - Loaded test image Model/Data/Test/Im047_0.jpg
+2020-09-05 01:43:59,071 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.2642934322357178 seconds.
+2020-09-05 01:43:59,185 - Model - INFO - Loaded test image Model/Data/Test/Im053_1.jpg
+2020-09-05 01:43:59,296 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly not detected (False Negative) in 0.22509431838989258 seconds.
+2020-09-05 01:43:59,413 - Model - INFO - Loaded test image Model/Data/Test/Im057_1.jpg
+2020-09-05 01:43:59,546 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.2503962516784668 seconds.
+2020-09-05 01:43:59,666 - Model - INFO - Loaded test image Model/Data/Test/Im060_1.jpg
+2020-09-05 01:43:59,783 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.23506760597229004 seconds.
+2020-09-05 01:43:59,911 - Model - INFO - Loaded test image Model/Data/Test/Im063_1.jpg
+2020-09-05 01:44:00,030 - Model - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive) in 0.24635100364685059 seconds.
+2020-09-05 01:44:00,163 - Model - INFO - Loaded test image Model/Data/Test/Im069_0.jpg
+2020-09-05 01:44:00,310 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.2791135311126709 seconds.
+2020-09-05 01:44:00,436 - Model - INFO - Loaded test image Model/Data/Test/Im074_0.jpg
+2020-09-05 01:44:00,574 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.263805627822876 seconds.
+2020-09-05 01:44:00,705 - Model - INFO - Loaded test image Model/Data/Test/Im088_0.jpg
+2020-09-05 01:44:00,821 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly detected (False Positive) in 0.24634122848510742 seconds.
+2020-09-05 01:44:00,935 - Model - INFO - Loaded test image Model/Data/Test/Im095_0.jpg
+2020-09-05 01:44:01,042 - Model - INFO - Acute Lymphoblastic Leukemia incorrectly detected (False Positive) in 0.22075915336608887 seconds.
+2020-09-05 01:44:01,162 - Model - INFO - Loaded test image Model/Data/Test/Im099_0.jpg
+2020-09-05 01:44:01,252 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.21043729782104492 seconds.
+2020-09-05 01:44:01,371 - Model - INFO - Loaded test image Model/Data/Test/Im101_0.jpg
+2020-09-05 01:44:01,416 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.16413259506225586 seconds.
+2020-09-05 01:44:01,531 - Model - INFO - Loaded test image Model/Data/Test/Im106_0.jpg
+2020-09-05 01:44:01,588 - Model - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative) in 0.17154455184936523 seconds.
+2020-09-05 01:44:01,589 - Model - INFO - Images Classifier: 20
+2020-09-05 01:44:01,591 - Model - INFO - True Positives: 9
+2020-09-05 01:44:01,593 - Model - INFO - False Positives: 2
+2020-09-05 01:44:01,593 - Model - INFO - True Negatives: 8
+2020-09-05 01:44:01,594 - Model - INFO - False Negatives: 1
+2020-09-05 01:44:01,595 - Model - INFO - Total Time Taken: 6.168334245681763
+```
+
+# Local Testing (OpenVINO)
+At the end of the training the program will freeze the Tensorflow model ready for converting to an Intermediate Representation so that the model can be used with OpenVINO.
+
+In the [Model](Model) directory, you will find the model files and a directory called **Freezing**. Inside this directory is the frozen model that you will convert. After the installation of OpenVINO on Windows and setting the environment variables, I was unable to run the [ALLOpenVINO.py](ALLOpenVINO.py) script which failed with the following error:
+
+```
+Traceback (most recent call last):
+  File "OpenVINO.py", line 18, in <module>
+    from openvino import inference_engine as ie
+  File "C:\Program Files (x86)\IntelSWTools\openvino\python\python3.6\openvino\inference_engine\__init__.py", line 1, in <module>
+    from .ie_api import *
+ImportError: DLL load failed: The specified module could not be found.
+```
+To use this model with OpenVINO on UP2, continue to the [OneAPI OpenVINO Raspberry UP2 Acute Lymphoblastic Leukemia Classifier](../UP2) project. To use this model with OpenVINO on RPI4, continue to the [OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic Leukemia Classifier](../RPI4) project.
 
 &nbsp;
 
@@ -452,7 +735,7 @@ Intel(R) Data Analytics Acceleration Library (Intel(R) DAAL) solvers for sklearn
 2020-09-04 09:46:52,672 - Core - INFO - ALLoneAPI CNN initialization complete.
 2020-09-04 09:46:52.707819: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
 2020-09-04 09:46:52,915 - Model - INFO - Model loaded
-Model: "AllDS2020_TF_CNN"
+Model: "ALLoneAPI_CNN"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #
 =================================================================
@@ -567,55 +850,15 @@ Intel(R) Data Analytics Acceleration Library (Intel(R) DAAL) solvers for sklearn
 
 &nbsp;
 
-# OpenVINO Testing
-At the end of the training the program will freeze the Tensorflow model ready for converting to an Intermediate Representation so that the model can be used with OpenVINO.
+# Conclusion
+Below is an overview of the benchmarks you carried out in this project.
 
-In the [Model](Model) directory, you will find the model files and a directory called **Freezing**. Inside this directory is the frozen model that we will convert. To convert the model to IR, use the following commands, replacing **PathToProjectRoot** with the path to the CNN folder on your computer:
-
-```
-  cd C:\Program Files (x86)\IntelSWTools\openvino\bin\
-  setupvars.bat
-  cd C:\Program Files (x86)\IntelSWTools\openvino\bin\deployment_tools\model_optimizer
-  python3 mo_tf.py --input_model PathToProjectRoot\Model\Freezing\frozen.pb --input_shape [1,100,100,3] --output_dir PathToProjectRoot\Model\IR --reverse_input_channels
-```
-
-This will create the Intermediate Representation and you can now move on to testing the IR with OpenVINO. This part of the system will use the test data from the **Model/Data/Test** directory. The command to start testing is as follows:
-
-```
-python OpenVINO.py
-```
-
-## OpenVINO Testing Results
-
-```
-2020-09-04 11:36:59,370 - OpenVINO - INFO - Helpers class initialization complete.
-2020-09-04 11:36:59,371 - OpenVINO - INFO - ALLoneAPI OpenVINO initialization complete.
-2020-09-04 11:36:59,695 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 11:36:59,916 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 11:37:00,130 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 11:37:00,344 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 11:37:00,454 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 11:37:00,669 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 11:37:00,779 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 11:37:01,142 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 11:37:01,252 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 11:37:01,466 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 11:37:01,680 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 11:37:01,879 - OpenVINO - INFO - Acute Lymphoblastic Leukemia incorrectly detected (False Positive)
-2020-09-04 11:37:01,989 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 11:37:02,203 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 11:37:02,419 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 11:37:02,634 - OpenVINO - INFO - Acute Lymphoblastic Leukemia incorrectly not detected (False Negative)
-2020-09-04 11:37:02,847 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly not detected (True Negative)
-2020-09-04 11:37:02,957 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 11:37:03,067 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 11:37:03,282 - OpenVINO - INFO - Acute Lymphoblastic Leukemia correctly detected (True Positive)
-2020-09-04 11:37:03,282 - OpenVINO - INFO - Images Classifier: 20
-2020-09-04 11:37:03,282 - OpenVINO - INFO - True Positives: 9
-2020-09-04 11:37:03,282 - OpenVINO - INFO - False Positives: 1
-2020-09-04 11:37:03,282 - OpenVINO - INFO - True Negatives: 9
-2020-09-04 11:37:03,282 - OpenVINO - INFO - False Negatives: 1
-```
+| Processing | Images | Time (seconds) |
+| -------------------- | -------------------- | -------------------- |
+| CPU | 20 | 4.290765762329102 |
+| CPU/Intel Optimized Tensorflow | 20 | 2.7342071533203125 |
+| GPU | 20 | 6.168334245681763 |
+| OpenVINO | 20 | NA |
 
 &nbsp;
 

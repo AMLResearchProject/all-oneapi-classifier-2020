@@ -27,6 +27,13 @@ This guide will take you through installing the requirements for the OneAPI Acut
 ## Anaconda
 If you haven't already installed Anaconda you will need to install it now. Follow the [Anaconda installation guide](https://docs.anaconda.com/anaconda/install/ "Anaconda installation guide") to do so.
 
+## Tensorflow GPU
+Now you will install Tensorflow GPU in an environment.
+
+```
+conda create --name tf2gpu tensorflow-gpu
+```
+
 ## Intel® Optimization for TensorFlow
 Now you will install the Intel® Optimization for TensorFlow using Anaconda.
 
@@ -76,8 +83,13 @@ The **-b "0.2.0"** parameter ensures you get the code from the latest master bra
 
 ## Setup File
 
-All other requirements are included in **Setup.sh**. You can run this file on machine by navigating to the **CNN** directory in terminal and using the commands below:
+All other requirements are included in **Setup.sh**. You can run this file on your machine by navigating to the **CNN** directory in terminal and using the commands below:
 
+```
+ conda activate tf2gpu
+ sh Setup.sh
+ conda deactivate
+```
 ```
  conda activate tfmkl
  sh Setup.sh
