@@ -1,8 +1,8 @@
 # Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
 ## OneAPI Acute Lymphoblastic Leukemia Classifier
-### OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic Leukemia Classifier
+### OneAPI OpenVINO UP2 Acute Lymphoblastic Leukemia Classifier
 
-![OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic Leukemia Classifier](../../Media/Images/Peter-Moss-Acute-Myeloid-Lymphoblastic-Leukemia-Research-Project.png)
+![OneAPI OpenVINO UP2 Acute Lymphoblastic Leukemia Classifier](../../Media/Images/Peter-Moss-Acute-Myeloid-Lymphoblastic-Leukemia-Research-Project.png)
 
 &nbsp;
 
@@ -12,7 +12,7 @@
 	- [Prerequisites](#prerequisites)
       - [OneAPI Acute Lymphoblastic Leukemia Classifier CNN](#oneapi-acute-lymphoblastic-leukemia-classifier-cnn)
       - [Intermediate Representation](#intermediate-representation)
-      - [Raspberry Pi Buster](#raspberry-pi-buster)
+      - [Ubuntu 18.04](#ubuntu-1804)
     - [Intel® Distribution of OpenVINO™ Toolkit](#intel-distribution-of-openvino-toolkit)
       - [Intel® Movidius™ Neural Compute Stick 2](#intel-movidius-neural-compute-stick-2)
 	- [Clone The Repository](#clone-the-repository)
@@ -42,33 +42,66 @@ To do this, once you have finished the OneAPI Acute Lymphoblastic Leukemia Class
  cd C:\Program Files (x86)\IntelSWTools\openvino\bin\
   setupvars.bat
   cd C:\Program Files (x86)\IntelSWTools\openvino\deployment_tools\model_optimizer
- python3 mo_tf.py --input_model PathToProject\Model\Freezing\frozen.pb --input_shape [1,100,100,3] --output_dir PathToProject\Model\IR --reverse_input_channels --generate_deprecated_IR_V7
+ python3 mo_tf.py --input_model PathToProject\Model\Freezing\frozen.pb --input_shape [1,100,100,3] --output_dir PathToProject\Model\IR --reverse_input_channels
 ```
-The Intermediate Representation for your model will now be accessible in the [CNN project IR directory](../../CNN/Model/IR), you need to copy these files to your Raspberry Pi in the same location in the RPI4 Model directory.
+The Intermediate Representation for your model will now be accessible in the [CNN project IR directory](../../CNN/Model/IR), you need to copy these files to your UP2 in the same location in the UP2 Model directory.
 
-### Raspberry Pi Buster
-For this Project, the operating system choice is [Raspberry Pi Buster](https://www.raspberrypi.org/downloads/raspberry-pi-os/ "Raspberry Pi Buster"), previously known as Raspian.
+### Ubuntu 18.04
+For this Project, the operating system choice is [Ubuntu 18.04](https://releases.ubuntu.com/18.04/ "Ubuntu 18.04").
 
 ## Intel® Distribution of OpenVINO™ Toolkit
-To install Intel® Distribution of OpenVINO™ Toolkit for Raspberry Pi, navigate to the home directory on your Raspberry Pi and use the following commands:
+To install Intel® Distribution of OpenVINO™ Toolkit, follow the steps on [this link](https://software.seek.intel.com/openvino-toolkit?os=linux) to download OpenVINO, making sure you choose 2020.4.
+
+Make sure the compressed folder is in you user home directory and use the following steps:
 
 ```
-  wget https://download.01.org/opencv/2020/openvinotoolkit/2020.4/l_openvino_toolkit_runtime_raspbian_p_2020.4.287.tgz
-  sudo mkdir -p /opt/intel/openvino
-  sudo tar -xf  l_openvino_toolkit_runtime_raspbian_p_2020.4.287.tgz  --strip 1 -C /opt/intel/openvino
-  sudo apt install cmake
+  tar -xvzf l_openvino_toolkit_p_2020.4.287.tgz
+  cd l_openvino_toolkit_p_2020.4.287
+  sudo ./install.sh
+```
+
+Follow the installation guide, once you have accepted the End User License and concented, or not consented to the collection of your data, the script will check the prerequisites.
+
+When you are told about missing dependencies. choose **1** to **Skip prerequisites** and then **1** again, and once more to **Skip prerequisites**.
+
+When instructed to, press **Enter** to quit.
+
+Now we need to update our **.bashrc** file so that OpenVINO loads every time you open a terminal.
+
+In your user home directory, use the following command:
+```
+  nano ~/.bashrc
+```
+This will open up the file in Nano. Scroll to the bottom and add:
+
+```
+  # OpenVINO
   source /opt/intel/openvino/bin/setupvars.sh
-  echo "source /opt/intel/openvino/bin/setupvars.sh" >> ~/.bashrc
 ```
-
-### Intel® Movidius™ Neural Compute Stick 2
-Now we will set up ready for Neural Compute Stick 2.
+Save and close the file then use the following command to source the .bashrc file:
+```
+  source ~/.bashrc
+```
+You will see the following:
+```
+  [setupvars.sh] OpenVINO environment initialized
+```
+And now we will configure the model optimizer:
+```
+  cd /opt/intel/openvino/deployment_tools/model_optimizer/install_prerequisites
+  sudo ./install_prerequisites.sh
+```
+### Intel® Movidius™ Neural Compute Stick and Intel® Neural Compute Stick 2
+Now we will set up ready for Neural Compute Stick and Neural Compute Stick 2.
 ```
   sudo usermod -a -G users "$(whoami)"
 ```
 Now close your existing terminal and open a new open. Once in your new terminal use the following commands:
 ```
-  sh /opt/intel/openvino/install_dependencies/install_NCS_udev_rules.sh
+  sudo cp /opt/intel/openvino/inference_engine/external/97-myriad-usbboot.rules /etc/udev/rules.d/
+  sudo udevadm control --reload-rules
+  sudo udevadm trigger
+  sudo ldconfig
 ```
 
 ## Clone the repository
@@ -92,7 +125,7 @@ Using the ls command in your home directory should show you the following.
  oneAPI-ALL-Classifier
 ```
 
-Navigate to **oneAPI-ALL-Classifier/RPI4** directory, this is your project root directory for this tutorial.
+Navigate to **oneAPI-ALL-Classifier/UP2** directory, this is your project root directory for this tutorial.
 
 ### Developer Forks
 
@@ -106,7 +139,7 @@ The **-b "0.4.0"** parameter ensures you get the code from the latest master bra
 
 ## Setup File
 
-All other requirements are included in **Setup.sh**. You can run this file on machine by navigating to the **RPI4** directory in terminal and using the commands below:
+All other requirements are included in **Setup.sh**. You can run this file on machine by navigating to the **UP2** directory in terminal and using the commands below:
 
 ```
  sed -i 's/\r//' Setup.sh
@@ -114,7 +147,7 @@ All other requirements are included in **Setup.sh**. You can run this file on ma
 ```
 
 # Continue
-Now you can continue with the [OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic Leukemia Classifier tutorial](../README.md#getting-started)
+Now you can continue with the [OneAPI OpenVINO UP2 Acute Lymphoblastic Leukemia Classifier tutorial](../README.md#getting-started)
 
 &nbsp;
 
