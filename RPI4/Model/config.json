@@ -2,11 +2,10 @@
     "cnn": {
         "system": {
             "cores": 8,
-            "server": "192.168.1.28",
+            "server": "",
             "port": 1234
         },
         "core": [
-            "Train",
             "Server",
             "Client",
             "Classify"
@@ -15,9 +14,6 @@
             "dim": 100,
             "file_type": ".jpg",
             "labels": [0, 1],
-            "rotations": 10,
-            "seed": 2,
-            "split": 0.3,
             "test": "Model/Data/Test",
             "test_data": [
                 "im006_1.jpg",
@@ -41,7 +37,6 @@
                 "im101_0.jpg",
                 "im106_0.jpg"
             ],
-            "train_dir": "Model/Data/Train",
             "valid_types": [
                 ".JPG",
                 ".JPEG",
@@ -62,12 +57,12 @@
             "saved_model_dir": "Model",
             "weights": "Model/weights.h5"
         },
-        "train": {
-            "batch": 100,
-            "decay_adam": 1e-6,
-            "epochs": 150,
-            "learning_rate_adam": 1e-4,
-            "val_steps": 10
+        "rpi4": {
+            "freezing_log_dir": "Model/Freezing",
+            "frozen": "frozen.pb",
+            "ir": "Model/IR/frozen.xml",
+            "inScaleFactor": 0.007843,
+            "meanVal": 0
         }
     }
 }
