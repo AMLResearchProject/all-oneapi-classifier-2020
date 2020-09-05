@@ -1,0 +1,57 @@
+{
+    "cnn": {
+        "system": {
+            "cores": 8,
+            "server": "",
+            "port": 1234
+        },
+        "core": [
+            "Server",
+            "Client",
+            "Classify"
+        ],
+        "data": {
+            "dim": 100,
+            "file_type": ".jpg",
+            "labels": [0, 1],
+            "test": "Model/Data/Test",
+            "test_data": [
+                "im006_1.jpg",
+                "im020_1.jpg",
+                "im024_1.jpg",
+                "im026_1.jpg",
+                "im028_1.jpg",
+                "im031_1.jpg",
+                "im035_0.jpg",
+                "im041_0.jpg",
+                "im047_0.jpg",
+                "im053_1.jpg",
+                "im057_1.jpg",
+                "im060_1.jpg",
+                "im063_1.jpg",
+                "im069_0.jpg",
+                "im074_0.jpg",
+                "im088_0.jpg",
+                "im095_0.jpg",
+                "im099_0.jpg",
+                "im101_0.jpg",
+                "im106_0.jpg"
+            ],
+            "valid_types": [
+                ".JPG",
+                ".JPEG",
+                ".PNG",
+                ".GIF",
+                ".jpg",
+                ".jpeg",
+                ".png",
+                ".gif"
+            ]
+        },
+        "model": {
+            "device": "CPU",
+            "frozen": "frozen.pb",
+            "ir": "Model/IR/frozen.xml"
+        }
+    }
+}
