@@ -27,8 +27,8 @@
         - [ALL-IDB Required Metrics](#all-idb-required-metrics)
 - [Local Testing (CPU)](#local-testing-cpu)
     - [Local Testing Results (CPU)](#local-testing-results-cpu)
-- [Local Testing (CPU/Intel Optimized Tensorflow)](#local-testing-cpu-intel-optimized-tensorflow)
-    - [Local Testing Results (CPU/Intel Optimized Tensorflow)](#local-testing-results-cpu-intel-optimized-tensorflow)
+- [Local Testing (CPU/Intel Optimized Tensorflow)](#local-testing-cpuintel-optimized-tensorflow)
+    - [Local Testing Results (CPU/Intel Optimized Tensorflow)](#local-testing-results-cpuintel-optimized-tensorflow)
 - [Local Testing (GPU)](#local-testing-gpu)
     - [Local Testing Results (GPU)](#local-testing-results-gpu)
 - [Local Testing (OpenVINO)](#local-testing-openvino)
@@ -703,7 +703,7 @@ This message will be only logged once.
 # Local Testing (OpenVINO)
 At the end of the training the program will freeze the Tensorflow model ready for converting to an Intermediate Representation so that the model can be used with OpenVINO.
 
-In the [Model](Model) directory, you will find the model files and a directory called **Freezing**. Inside this directory is the frozen model that you will convert. After the installation of OpenVINO on Windows and setting the environment variables, I was unable to run the [OpenVINO.py](OpenVINO.py) script which failed with the following error:
+In the [Model](Model) directory, you will find the model files and a directory called **Freezing**. Inside this directory is the frozen model that you will convert. After the installation of OpenVINO on Windows and setting the environment variables, I was unable to run the [ALLOpenVINO.py](ALLOpenVINO.py) script which failed with the following error:
 
 ```
 Traceback (most recent call last):
