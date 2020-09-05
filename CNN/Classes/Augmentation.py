@@ -2,14 +2,14 @@
 #
 # Project:       Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
 # Repository:    ALL Detection System 2020
-# Project:       ALLoneAPI CNN
+# Project:       OneAPI Acute Lymphoblastic Leukemia Classifier CNN
 #
 # Author:        Adam Milton-Barker (AdamMiltonBarker.com)
-# Contributors:
+#
 # Title:         Augmentation helper class
-# Description:   Augmentation functions for OneAPI Acute Lymphoblastic Leukemia Classifier.
+# Description:   Augmentation functions for OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
 # License:       MIT License
-# Last Modified: 2020-09-03
+# Last Modified: 2020-09-04
 #
 ############################################################################################
 
@@ -28,7 +28,7 @@ from Classes.Helpers import Helpers
 class Augmentation():
 	""" Data Augmentation Class
 
-	Data augmentation helper class for the OneAPI Acute Lymphoblastic Leukemia Classifier.
+	Data augmentation helper class for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
 	"""
 
 	def __init__(self):
@@ -39,7 +39,7 @@ class Augmentation():
 		self.seed = self.Helpers.confs["cnn"]["data"]["seed"]
 		seed(self.seed)
 
-		self.Helpers.logger.info("Data augmentation class initialization complete.")
+		self.Helpers.logger.info("Class initialization complete.")
 
 	def grayscale(self, data):
 		""" Creates a grayscale copy. """

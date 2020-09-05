@@ -2,15 +2,15 @@
 #
 # Project:       Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
 # Repository:    OneAPI Acute Lymphoblastic Leukemia Classifier
-# Project:       ALLoneAPI Classifier
+# Project:       OneAPI Acute Lymphoblastic Leukemia Classifier CNN
 #
 # Author:        Adam Milton-Barker (AdamMiltonBarker.com)
-# Contributors:
+#
 # Title:         Helper Class
-# Description:   Helper functions for the OneAPI Acute Lymphoblastic Leukemia Classifier
+# Description:   Helper functions for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN
 #                ALL Classifier.
 # License:       MIT License
-# Last Modified: 2020-09-03
+# Last Modified: 2020-09-04
 #
 ############################################################################################
 
@@ -26,7 +26,7 @@ from datetime import datetime
 class Helpers():
 	""" Helper Class
 
-	Helper functions for the ALL Detection System 2020 ALL Classifier.
+	Helper functions for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
 	"""
 
 	def __init__(self, ltype, log=True):
@@ -65,7 +65,7 @@ class Helpers():
 		self.logger.addHandler(consoleHandler)
 
 		if log is True:
-			self.logger.info("Helpers class initialization complete.")
+			self.logger.info("Class initialization complete.")
 
 	def loadConfs(self):
 		""" Load the program configuration. """

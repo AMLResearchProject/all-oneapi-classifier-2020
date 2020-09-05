@@ -20,9 +20,6 @@
 - [Intel® Distribution of OpenVINO™ Toolkit](#intel-distribution-of-openvino-toolkit)
 - [Intel® Movidius™ Neural Compute Stick 2](#intel-movidius-neural-compute-stick-2)
 - [Projects](#projects)
-  - [CNN](#cnn)
-  - [RPI4](#RPI4)
-  - [UP2](#UP2)
 - [Contributing](#contributing)
   - [Contributors](#contributors)
 - [Versioning](#versioning)
@@ -32,7 +29,6 @@
 &nbsp;
 
 # Introduction
-
 ![OneAPI Acute Lymphoblastic Leukemia Classifier](Media/Images/paper_1_architecture.png)
 
 _Fig 1. Proposed architecture ([Source](https://airccj.org/CSCP/vol7/csit77505.pdf "Source"))_
@@ -99,21 +95,29 @@ In this project, [ALL-IDB1](https://homes.di.unimi.it/scotti/all/#datasets) is u
 
 #### Intel® Movidius™ Neural Compute Stick 2
 [![Intel® Movidius™ Neural Compute Stick 2](Media/Images/Movidius-NCS2.jpg)](https://software.intel.com/content/www/us/en/develop/hardware/neural-compute-stick.html)
-The Intel® Movidius™ Neural Compute Stick 2 is a USB plug & play AI device for deep learning inference at the edge. Combined with the Intel® OpenVINO™ Toolkit, developers can develop, fine-tune, and deploy convolutional neural networks (CNNs) on low-power applications that require real-time inference.
+The [Intel® Movidius™ Neural Compute Stick 2](https://software.intel.com/content/www/us/en/develop/hardware/neural-compute-stick.html) is a USB plug & play AI device for deep learning inference at the edge. Combined with the Intel® OpenVINO™ Toolkit, developers can develop, fine-tune, and deploy convolutional neural networks (CNNs) on low-power applications that require real-time inference.
 
 &nbsp;
 
 #  Projects
 There are three projects included in this repository: [CNN](CNN), [RPI4](RPI4) & [UP2](UP2).
 
-## CNN
-[CNN](CNN) is the main project, this is the project that you will use to train your Acute Lymphoblastic Leukemia classifier, freeze the model and convert the model to an Intermediate Representation so that it can be used with OpenVINO.
+| Project | Description | Author |
+| -------------------- | -------------------- | -------------------- |
+| [OneAPI Acute Lymphoblastic Leukemia Classifier CNN](CNN) | The OneAPI Acute Lymphoblastic Leukemia Classifier CNN is the main project, this is the project that you will use to train your Acute Lymphoblastic Leukemia classifier, freeze the model and convert the model to an Intermediate Representation so that it can be used with OpenVINO. | [Adam Milton-Barker](https://www.leukemiaresearchassociation.ai/team/adam-milton-barker "Adam Milton-Barker") |
+| [OneAPI Raspbeery Pi 4 Acute Lymphoblastic Leukemia Classifier](RPI4) | The OneAPI Raspbeery Pi 4 Acute Lymphoblastic Leukemia Classifier is a project that allows you to run your model on a Raspberry Pi 4 using OpenVINO. The project includes IoT connectivity using the HIAS iotJumpWay broker meaning it can be used with any of the HIAS detection systems. | [Adam Milton-Barker](https://www.leukemiaresearchassociation.ai/team/adam-milton-barker "Adam Milton-Barker") |
+| [OneAPI UP2 Acute Lymphoblastic Leukemia Classifier](UP2) | The OneAPI UP2 Acute Lymphoblastic Leukemia Classifier is a project that allows you to run your model on a UP2 using OpenVINO. The project includes IoT connectivity using the HIAS iotJumpWay broker meaning it can be used with any of the HIAS detection systems. | [Adam Milton-Barker](https://www.leukemiaresearchassociation.ai/team/adam-milton-barker "Adam Milton-Barker") |
 
-## RPI4
-[RPI4](RPI4) is a project that allows you to run your model on a Raspberry Pi 4 using OpenVINO. The project includes IoT connectivity using the HIAS iotJumpWay broker meaning it can be used with any of the HIAS detection systems.
+&nbsp;
 
-## UP2
-[UP2](UP2) is a project that allows you to run your model on a UP2 using OpenVINO. The project includes IoT connectivity using the HIAS iotJumpWay broker meaning it can be used with any of the HIAS detection systems.
+#  Compatible Projects
+These projects are compatible with the following projects.
+
+| Project | Description | Author |
+| -------------------- | -------------------- | -------------------- |
+| [OneAPI Acute Lymphoblastic Leukemia Classifier CNN](CNN) | The OneAPI Acute Lymphoblastic Leukemia Classifier CNN is the main project, this is the project that you will use to train your Acute Lymphoblastic Leukemia classifier, freeze the model and convert the model to an Intermediate Representation so that it can be used with OpenVINO. | [Adam Milton-Barker](https://www.leukemiaresearchassociation.ai/team/adam-milton-barker "Adam Milton-Barker") |
+| [OneAPI Raspbeery Pi 4 Acute Lymphoblastic Leukemia Classifier](RPI4) | The OneAPI Raspbeery Pi 4 Acute Lymphoblastic Leukemia Classifier is a project that allows you to run your model on a Raspberry Pi 4 using OpenVINO. The project includes IoT connectivity using the HIAS iotJumpWay broker meaning it can be used with any of the HIAS detection systems. | [Adam Milton-Barker](https://www.leukemiaresearchassociation.ai/team/adam-milton-barker "Adam Milton-Barker") |
+| [OneAPI UP2 Acute Lymphoblastic Leukemia Classifier](UP2) | The OneAPI UP2 Acute Lymphoblastic Leukemia Classifier is a project that allows you to run your model on a UP2 using OpenVINO. The project includes IoT connectivity using the HIAS iotJumpWay broker meaning it can be used with any of the HIAS detection systems. | [Adam Milton-Barker](https://www.leukemiaresearchassociation.ai/team/adam-milton-barker "Adam Milton-Barker") |
 
 &nbsp;
 

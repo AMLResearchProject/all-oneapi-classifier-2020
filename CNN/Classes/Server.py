@@ -2,16 +2,17 @@
 #
 # Project:       Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
 # Repository:    OneAPI Acute Lymphoblastic Leukemia Classifier
-# Project:       ALLoneAPI CNN
+# Project:       OneAPI Acute Lymphoblastic Leukemia Classifier CNN
 #
 # Author:        Adam Milton-Barker (AdamMiltonBarker.com)
 # Contributors:
 # Title:         Server helper class
-# Description:   Server functions for the OneAPI Acute Lymphoblastic Leukemia Classifier.
+# Description:   Server functions for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
 # License:       MIT License
-# Last Modified: 2020-09-03
+# Last Modified: 2020-09-04
 #
 ############################################################################################
+
 import jsonpickle
 
 from flask import Flask, request, Response
@@ -21,7 +22,7 @@ from Classes.Helpers import Helpers
 class Server():
 	""" Server helper class
 
-	Server functions for the OneAPI Acute Lymphoblastic Leukemia Classifier.
+	Server functions for the OneAPI Acute Lymphoblastic Leukemia Classifier CNN.
 	"""
 
 	def __init__(self, model):
@@ -30,6 +31,8 @@ class Server():
 		self.Helpers = Helpers("Server", False)
 
 		self.model = model
+
+		self.Helpers.logger.info("Class initialization complete.")
 
 	def start(self):
 		""" Starts the server. """
@@ -53,44 +56,6 @@ class Server():
 				'Response': 'OK',
 				'Message': message,
 				'Diagnosis': diagnosis
-			})
-
-			return Response(response=resp, status=200, mimetype="application/json")
-
-		@app.route('/VRInference', methods=['POST'])
-		def VRInference(id):
-			""" Responds to requests from Oculus Rift. """
-
-			t_drive = self.Helpers.confs["cnn"]["data"]["test_data"]
-
-			if int(id)-1 > len(t_drive):
-				ServerResponse = jsonpickle.encode({
-					'Response': 'FAILED',
-					'Message': 'No testing data with provided ID'
-				})
-
-			i = int(id)-1
-
-			test_image = self.Helpers.confs["cnn"]["data"]["test"] + "/" + t_drive[i]
-
-			if not os.path.isfile(test_image):
-				ServerResponse = jsonpickle.encode({
-					'Response': 'FAILED',
-					'Message': 'No testing data with filename exists'
-				})
-
-			message = ""
-			classification = self.model.vr_http_classify(cv2.imread(test_image))
-
-			if classification == 1:
-				msg = "Positive"
-			elif classification == 0:
-				message  = "Negative"
-
-			resp = jsonpickle.encode({
-				'Response': 'OK',
-				'Message': message,
-				'Classification': classification
 			})
 
 			return Response(response=resp, status=200, mimetype="application/json")
