@@ -713,7 +713,7 @@ Traceback (most recent call last):
     from .ie_api import *
 ImportError: DLL load failed: The specified module could not be found.
 ```
-To use this model with OpenVINO on UP2, continue to the [Acute Lymphoblastic Leukemia oneAPI UP2 Classifier](../UP2) project. To use this model with OpenVINO on RPI4, continue to the [Acute Lymphoblastic Leukemia oneAPI UP2 Classifier](../RPI4) project.
+To use this model with OpenVINO on UP2, continue to the [OneAPI OpenVINO Raspberry UP2 Acute Lymphoblastic Leukemia Classifier](../UP2) project. To use this model with OpenVINO on RPI4, continue to the [OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic Leukemia Classifier](../RPI4) project.
 
 &nbsp;
 
