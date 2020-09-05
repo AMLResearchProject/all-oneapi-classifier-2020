@@ -191,7 +191,7 @@ This part of the tutorial tests the CNN model on the UP2, OpenVINO and the test 
  python ALLOpenVINO.py Classify
 ```
 
-## Local Testing Results (CPU)
+## Local Testing Results (OpenVINO)
 
 ```
 2020-09-05 06:27:05,360 - Core - INFO - Class initialization complete.
