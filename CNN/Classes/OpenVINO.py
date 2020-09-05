@@ -16,7 +16,6 @@
 import cv2
 import json
 import os
-import random
 import requests
 import time
 
