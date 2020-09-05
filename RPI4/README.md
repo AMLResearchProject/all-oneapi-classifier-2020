@@ -15,7 +15,17 @@
 - [Network Architecture](#network-architecture)
   - [Results Overview](#results-overview)
 - [Installation](#installation)
+- [Getting Started](#getting-started)
     - [Data](#data)
+    - [Configuration](#configuration)
+- [Local Testing (CPU)](#local-testing-cpu)
+    - [Local Testing Results (CPU)](#local-testing-results-cpu)
+- [Server Testing (CPU)](#server-testing-cpu)
+    - [Server Testing Results (CPU)](#server-testing-results-cpu)
+- [Local Testing (OpenVINO/NCS2)](#local-testing-openvinoncs2)
+    - [Local Testing Results (CPU)](#local-testing-results-openvinoncs2)
+- [Server Testing (OpenVINO/NCS2)](#server-testing-openvinoncs2)
+    - [Server Testing Results (OpenVINO/NCS2)](#server-testing-results-openvinoncs2)
 - [Contributing](#contributing)
   - [Contributors](#contributors)
 - [Versioning](#versioning)
@@ -104,7 +114,7 @@ You need to use the following test data if you are using the pre-trained model, 
 
 &nbsp;
 
-# Configuration
+## Configuration
 
 [config.json](Model/config.json "config.json")  holds the configuration for our network. You need to update the **cnn->system->server** field with the IP of your Raspberry Pi 4, you should also change the port.
 
@@ -353,7 +363,7 @@ Now we will use the test data to see how the classifier reacts to our testing da
  python ALLOpenVINO.py Classify
 ```
 
-## Local Testing Results (CPU/NCS2)
+## Local Testing Results (OpenVINO/NCS2)
 
 ```
 2020-09-05 06:59:42,670 - Core - INFO - Class initialization complete.
@@ -411,7 +421,7 @@ We see that using OpenVINO and Neural Compute Stick 2 on the Raspberry Pi 4 has 
 
 &nbsp;
 
-# Server Testing (OpenVINO/NC2)
+# Server Testing (OpenVINO/NCS2)
 Now we will use the test data to see how the server classifier reacts using the CNN model on the Raspberry Pi with OpenVINO and Neural Compute Stick 2.
 
 You need to open two terminal windows or tabs, in the first, use the following command to start the server:
@@ -426,7 +436,7 @@ In your second terminal, use the following command:
 python ALLOpenVINO.py Client
 ```
 
-## Server Testing Results (OpenVINO/NC2)
+## Server Testing Results (OpenVINO/NCS2)
 
 ```
 2020-09-05 06:10:17,604 - Core - INFO - Class initialization complete.
