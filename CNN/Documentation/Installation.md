@@ -76,10 +76,10 @@ Navigate to **oneAPI-ALL-Classifier/CNN** directory, this is your project root d
 Developers from the Github community that would like to contribute to the development of this project should first create a fork, and clone that repository. For detailed information please view the [CONTRIBUTING](../../CONTRIBUTING.md "CONTRIBUTING") guide. You should pull the latest code from the development branch.
 
 ```
- git clone -b "0.2.0" https://github.com/AMLResearchProject/oneAPI-ALL-Classifier.git
+ git clone -b "0.4.0" https://github.com/AMLResearchProject/oneAPI-ALL-Classifier.git
 ```
 
-The **-b "0.2.0"** parameter ensures you get the code from the latest master branch. Before using the below command please check our latest master branch in the button at the top of the project README.
+The **-b "0.4.0"** parameter ensures you get the code from the latest master branch. Before using the below command please check our latest master branch in the button at the top of the project README.
 
 ## Setup File
 
