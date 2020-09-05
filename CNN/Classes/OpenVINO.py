@@ -78,7 +78,6 @@ class OpenVINO():
 
 				start = time.time()
 				img = Image.open(fileName)
-				print(img)
 				processed = self.reshape(img)
 				prediction = self.get_predictions(processed)
 				end = time.time()
