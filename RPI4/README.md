@@ -26,6 +26,7 @@
     - [Local Testing Results (CPU)](#local-testing-results-openvinoncs2)
 - [Server Testing (OpenVINO/NCS2)](#server-testing-openvinoncs2)
     - [Server Testing Results (OpenVINO/NCS2)](#server-testing-results-openvinoncs2)
+- [iotJumpWay Data](#iotjumpway-data)
 - [Contributing](#contributing)
   - [Contributors](#contributors)
 - [Versioning](#versioning)
@@ -490,6 +491,17 @@ python ALLOpenVINO.py Client
 2020-09-05 06:12:54,128 - OpenVINO - INFO - False Negatives: 1
 ```
 We see that we have maintained the same accuracy when testing the server on the OpenVINO/NC2.
+
+&nbsp;
+
+# iotJumpWay Data
+![HIAS iotJumpWay Data](Media/Images/iotJumpWay-Device-Create.png)
+
+A record of classifications are stored in the HIAS IoT Database via MQTT. Before the data can be stored in the database, the iotJumpWay service will verify via the HIAS iotJumpWay Blockchain Contract that the device has the permissions to store the data. Once the data is stored, a hash is stored on the blockchain which provides data integrity.
+
+![HIAS iotJumpWay Data](Media/Images/data-integrity.png)
+
+A record of each time the device connects and disconnects from the broker is also saved in the database, and a hash on the blockchain for data integrity.
 
 &nbsp;
 
