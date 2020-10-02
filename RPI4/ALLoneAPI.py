@@ -1,17 +1,18 @@
-############################################################################################
+#########################################################################################################
 #
-# Project:       Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
-# Repository:    oneAPI Acute Lymphoblastic Leukemia Classifier
-# Project:       ALLoneAPI RPI4 CNN
+# Organization:     Asociacion De Investigacion En Inteligencia Artificial Para La Leucemia Peter Moss
+# Research Project: Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
+# Repository:       oneAPI Acute Lymphoblastic Leukemia Classifier
+# Project:          OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic Leukemia Classifier
 #
-# Author:        Adam Milton-Barker (AdamMiltonBarker.com)
+# Author:           Adam Milton-Barker (AdamMiltonBarker.com)
 #
-# Title:         ALLoneAPI RPI4 CNN Core
-# Description:   Core class for the oneAPI RPI4 Acute Lymphoblastic Leukemia Classifier.
-# License:       MIT License
-# Last Modified: 2020-09-04
+# Title:            ALLoneAPI RPI4 CNN Core
+# Description:      Core class for the oneAPI RPI4 Acute Lymphoblastic Leukemia Classifier.
+# License:          MIT License
+# Last Modified:    2020-10-02
 #
-############################################################################################
+#########################################################################################################
 
 import sys
 
