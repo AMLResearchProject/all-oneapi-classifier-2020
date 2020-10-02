@@ -64,5 +64,17 @@
             "inScaleFactor": 0.007843,
             "meanVal": 0
         }
+    },
+    "iotJumpWay": {
+        "host": "",
+        "port": 8883,
+        "ip": "localhost",
+        "ipinfo": "",
+        "lid": 0,
+        "zid": 0,
+        "did": 0,
+        "dn": "",
+        "un": "",
+        "pw": ""
     }
 }

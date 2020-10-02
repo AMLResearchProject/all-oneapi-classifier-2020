@@ -10,11 +10,13 @@
 
 - [Installation](#installation)
 	- [Prerequisites](#prerequisites)
+      - [HIAS Server](#hias-server)
       - [OneAPI Acute Lymphoblastic Leukemia Classifier CNN](#oneapi-acute-lymphoblastic-leukemia-classifier-cnn)
       - [Intermediate Representation](#intermediate-representation)
       - [Raspberry Pi Buster](#raspberry-pi-buster)
     - [Intel® Distribution of OpenVINO™ Toolkit](#intel-distribution-of-openvino-toolkit)
       - [Intel® Movidius™ Neural Compute Stick 2](#intel-movidius-neural-compute-stick-2)
+	- [HIAS iotJumpWay](#clone-the-repository)
 	- [Clone The Repository](#clone-the-repository)
 	- [Setup File](#setup-file)
 	- [Continue](#continue)
@@ -29,6 +31,9 @@ This guide will take you through installing the requirements for the OneAPI Acut
 
 ## Prerequisites
 Before you can install this project, there are some prerequisites.
+
+### HIAS Server
+For this project you will need a functioning [HIAS Server](https://github.com/LeukemiaAiResearch/HIAS). To install the HIAS Server, follow the [HIAS Server Installation Guide](https://github.com/LeukemiaAiResearch/HIAS/blob/master/Documentation/Installation/Installation.md)
 
 ### OneAPI Acute Lymphoblastic Leukemia Classifier CNN
 For this project you will use the model created in the [CNN](../../CNN "CNN") project. If you would like to train your own model you can follow the CNN guide, or you can use the pre-trained model and weights provided in the [Model](../Model "Model") directory.
@@ -71,6 +76,30 @@ Now close your existing terminal and open a new open. Once in your new terminal 
   sh /opt/intel/openvino/install_dependencies/install_NCS_udev_rules.sh
 ```
 
+## HIAS iotJumpWay
+![HIAS iotJumpWay](../Media/Images/iotJumpWay-Device-Create.png)
+
+You will need a HIAS iotJumpWay device to run this application. Log in to your HIAS Server UI and navigate to **IoT->Devices** and click on the **+** button to create a new device.
+
+Fill in the details and once you click **Create** you will be provided with the credentials for your iotJumpWay device. Make sure you save the Blockchain password as you will not be able to recover or change them in the future, the other credenitials you will be able to retrieve through the device page and/or reset them.
+
+Open the configuration file [config.json](../Model/config.json) and fill in your HIAS iotJumpWay and HIAS iotJumpWay device details.
+
+```
+  "iotJumpWay": {
+      "host": "",
+      "port": 8883,
+      "ip": "localhost",
+      "ipinfo": "",
+      "lid": 0,
+      "zid": 0,
+      "did": 0,
+      "dn": "",
+      "un": "",
+      "pw": ""
+  }
+```
+
 ## Clone the repository
 Clone the [OneAPI Acute Lymphoblastic Leukemia Classifier](https://github.com/AMLResearchProject/oneAPI-ALL-Classifier " OneAPI Acute Lymphoblastic Leukemia Classifier") repository from the [Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project](https://github.com/AMLResearchProject "Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project") Github Organization.
 
@@ -99,10 +128,10 @@ Navigate to **oneAPI-ALL-Classifier/RPI4** directory, this is your project root 
 Developers from the Github community that would like to contribute to the development of this project should first create a fork, and clone that repository. For detailed information please view the [CONTRIBUTING](../../CONTRIBUTING.md "CONTRIBUTING") guide. You should pull the latest code from the development branch.
 
 ```
- git clone -b "0.4.0" https://github.com/AMLResearchProject/oneAPI-ALL-Classifier.git
+ git clone -b "0.5.0" https://github.com/AMLResearchProject/oneAPI-ALL-Classifier.git
 ```
 
-The **-b "0.4.0"** parameter ensures you get the code from the latest master branch. Before using the below command please check our latest master branch in the button at the top of the project README.
+The **-b "0.5.0"** parameter ensures you get the code from the latest master branch. Before using the below command please check our latest master branch in the button at the top of the project README.
 
 ## Setup File
 

@@ -1,18 +1,19 @@
-############################################################################################
+#########################################################################################################
 #
-# Project:       Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
-# Repository:    OneAPI Acute Lymphoblastic Leukemia Classifier
-# Project:       OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic Leukemia Classifier
+# Organization:     Asociacion De Investigacion En Inteligencia Artificial Para La Leucemia Peter Moss
+# Research Project: Peter Moss Acute Myeloid & Lymphoblastic Leukemia AI Research Project
+# Repository:       oneAPI Acute Lymphoblastic Leukemia Classifier
+# Project:          OneAPI OpenVINO Raspberry Pi 4 Acute Lymphoblastic Leukemia Classifier
 #
-# Author:        Adam Milton-Barker (AdamMiltonBarker.com)
+# Author:           Adam Milton-Barker (AdamMiltonBarker.com)
 # Contributors:
-# Title:         Model Class
-# Description:   Model functions for the OneAPI OpenVINO Raspberry Pi 4 Acute
-#                Lymphoblastic Leukemia Classifier.
-# License:       MIT License
-# Last Modified: 2020-09-03
+# Title:            Model Class
+# Description:      Model functions for the OneAPI OpenVINO Raspberry Pi 4 Acute
+#                   Lymphoblastic Leukemia Classifier.
+# License:          MIT License
+# Last Modified:    2020-10-02
 #
-############################################################################################
+#########################################################################################################
 
 import cv2
 import json
